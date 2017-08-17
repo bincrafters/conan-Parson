@@ -25,11 +25,13 @@ class ParsonConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy(pattern="LICENSE", dst=".", src=".")
+        self.copy(pattern="LICENSE", dst=".", src=".", keep_path=False)
         self.copy(pattern="parson.h", dst="include", src=self.release_name)
-        self.copy(pattern="*.a", dst="lib", src=".")
-        self.copy(pattern="*.so*", dst="lib", src=".")
-        self.copy(pattern="*.dylib", dst="lib", src=".")
+        self.copy(pattern="*.a", dst="lib", src=".", keep_path=False)
+        self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
+        self.copy(pattern="*.dylib", dst="lib", src=".", keep_path=False)
+        self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
+        self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
