@@ -1,4 +1,4 @@
-from conans import ConanFile
+from conans import ConanFile, CMake, tools
 
 
 class ParsonConan(ConanFile):
@@ -10,21 +10,24 @@ class ParsonConan(ConanFile):
     source_url = "https://github.com/kgabis/parson"
     description = "Lightweight JSON library written in C."
     license = "https://opensource.org/licenses/mit-license.php"
-    exports = "LICENSE"
-    export_sources = "CMakeLists.txt"
+    exports = ["LICENSE"]
+    exports_sources = ["CMakeLists.txt"]
+    release_name = name.lower()
 
     def source(self):
-        for lib_short_name in self.lib_short_names:
-            self.run("git clone --depth=50 {0}.git"
-                     .format(source_url))
+        self.run("git clone --depth=50 {0}.git".format(self.source_url))
 
     def build(self):
-
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package(self):
         self.copy(pattern="LICENSE", dst=".", src=".")
-        self.copy(pattern="parson.h", dst="include", src=".")
-        self.copy(pattern="*", dst="lib", src="lib")
+        self.copy(pattern="parson.h", dst="include", src=self.release_name)
+        self.copy(pattern="*.a", dst="lib", src=".")
+        self.copy(pattern="*.so*", dst="lib", src=".")
+        self.copy(pattern="*.dylib", dst="lib", src=".")
 
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
