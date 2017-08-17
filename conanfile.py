@@ -9,6 +9,7 @@ class ParsonConan(ConanFile):
     url = "https://github.com/bincrafters/conan-parson"
     source_url = "https://github.com/kgabis/parson"
     description = "Lightweight JSON library written in C."
+    export_sources = "CMakeLists.txt"
     
     def source(self):
         for lib_short_name in self.lib_short_names:
