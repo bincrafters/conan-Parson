@@ -1,1 +1,0 @@
-conan upload --all --remote bincrafters Parson/0.0.1@bincrafters/testing

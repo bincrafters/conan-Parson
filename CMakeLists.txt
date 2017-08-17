@@ -1,6 +1,9 @@
 project(Parson)
 cmake_minimum_required(VERSION 2.8)
 
+include(conanbuildinfo.cmake)
+CONAN_BASIC_SETUP()
+
 file(GLOB SOURCE_FILES parson/*.c)
 
 add_library(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})

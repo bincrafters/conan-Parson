@@ -9,6 +9,8 @@ class ParsonConan(ConanFile):
     url = "https://github.com/bincrafters/conan-parson"
     source_url = "https://github.com/kgabis/parson"
     description = "Lightweight JSON library written in C."
+    options = {"shared": [True, False]}
+    default_options = "shared=True"
     license = "https://opensource.org/licenses/mit-license.php"
     exports = ["LICENSE"]
     exports_sources = ["CMakeLists.txt"]
