@@ -1,1 +1,1 @@
-conan upload --all --remote bincrafters Azure-IOT-SDK-C/0.0.1@bincrafters/testing
+conan upload --all --remote bincrafters Parson/0.0.1@bincrafters/testing
