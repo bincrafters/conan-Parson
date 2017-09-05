@@ -1,9 +1,9 @@
-from conans import ConanFile, CMake, tools
+from conans import ConanFile, CMake
 
 
 class ParsonConan(ConanFile):
     name = "Parson"
-    version = "0.0.1"
+    version = "0.1.0"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/bincrafters/conan-parson"
@@ -27,6 +27,7 @@ class ParsonConan(ConanFile):
     def package(self):
         self.copy(pattern="LICENSE", dst=".", src=".", keep_path=False)
         self.copy(pattern="parson.h", dst="include", src=self.release_name)
+        self.copy(pattern="parson.c", dst="src", src=self.release_name)
         self.copy(pattern="*.a", dst="lib", src=".", keep_path=False)
         self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
         self.copy(pattern="*.dylib", dst="lib", src=".", keep_path=False)

@@ -1,7 +1,7 @@
 
 env:
    global:
-     - CONAN_REFERENCE: "Parson/0.0.1"
+     - CONAN_REFERENCE: "Parson/0.1.0"
      - CONAN_USERNAME: "bincrafters"
      - CONAN_CHANNEL: "ci"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/bincrafters/public-conan"

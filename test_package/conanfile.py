@@ -6,7 +6,7 @@ class ParsonTestConan(ConanFile):
     generators = "cmake"
     user = os.getenv("CONAN_USERNAME", "bincrafters")
     channel = os.getenv("CONAN_CHANNEL", "testing")
-    requires = "Parson/0.0.1@%s/%s" % (user, channel)
+    requires = "Parson/0.1.0@%s/%s" % (user, channel)
     exports_sources = ["tests/*"]
 
     def build(self):
