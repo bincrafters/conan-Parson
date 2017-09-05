@@ -19,6 +19,10 @@ class ParsonConan(ConanFile):
     def source(self):
         self.run("git clone --depth=50 {0}.git".format(self.source_url))
 
+    def configure(self):
+        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
+            self.options.shared = False
+
     def build(self):
         cmake = CMake(self)
         cmake.configure()
