@@ -17,7 +17,7 @@ class ParsonConan(ConanFile):
     release_name = name.lower()
 
     def source(self):
-        self.run("git clone --depth=50 {0}.git".format(self.source_url))
+        self.run("git clone --depth=1 {0}.git".format(self.source_url))
 
     def configure(self):
         if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
