@@ -1,4 +1,5 @@
-from conans import ConanFile, CMake
+import os
+from conans import ConanFile, CMake, tools
 
 
 class ParsonConan(ConanFile):
@@ -6,37 +7,31 @@ class ParsonConan(ConanFile):
     version = "0.1.0"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
+    homepage = "https://github.com/kgabis/parson"
     url = "https://github.com/bincrafters/conan-parson"
+    author = "Bincrafters <bincrafters@gmail.com>"
     source_url = "https://github.com/kgabis/parson"
     description = "Lightweight JSON library written in C."
     options = {"shared": [True, False]}
-    default_options = "shared=True"
-    license = "https://opensource.org/licenses/mit-license.php"
-    exports = ["LICENSE"]
-    exports_sources = ["CMakeLists.txt"]
-    release_name = name.lower()
+    default_options = "shared=False"
+    license = "https://github.com/kgabis/parson/blob/master/LICENSE"
+    exports_sources = ["LICENSE", "CMakeLists.txt"]
 
     def source(self):
-        self.run("git clone --depth=1 {0}.git".format(self.source_url))
+        tools.get("https://github.com/kgabis/parson/archive/master.zip")
+        os.rename("parson-master", "parson")
 
     def configure(self):
-        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio":
-            self.options.shared = False
+        del self.settings.compiler.libcxx
 
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+        cmake.install()
 
     def package(self):
-        self.copy(pattern="LICENSE", dst=".", src=".", keep_path=False)
-        self.copy(pattern="parson.h", dst="include", src=self.release_name)
-        self.copy(pattern="parson.c", dst="src", src=self.release_name)
-        self.copy(pattern="*.a", dst="lib", src=".", keep_path=False)
-        self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
-        self.copy(pattern="*.dylib", dst="lib", src=".", keep_path=False)
-        self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
-        self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
+        self.copy(pattern="LICENSE", dst="licenses", src="parson", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = self.collect_libs()
+        self.cpp_info.libs = tools.collect_libs(self)
