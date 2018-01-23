@@ -12,7 +12,7 @@ version: 2
 jobs:
   xcode8:
     macos:
-      xcode: "8.3"
+      xcode: "8.3.3"
     environment:
       - CONAN_APPLE_CLANG_VERSIONS: "8.1"
     <<: *conan-steps

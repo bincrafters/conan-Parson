@@ -40,7 +40,7 @@ def get_ci_vars():
     reponame_t = os.getenv("TRAVIS_REPO_SLUG","")
     repobranch_t = os.getenv("TRAVIS_BRANCH","")
 
-    reponame_c = os.getenv("CIRCLE_PROJECT_USERNAME", "")
+    reponame_c = "%s/%s" % (os.getenv("CIRCLE_PROJECT_USERNAME", "") , os.getenv("CIRCLE_PROJECT_REPONAME", ""))
     repobranch_c = os.getenv("CIRCLE_BRANCH", "")
 
     reponame = reponame_a or reponame_t or reponame_c
