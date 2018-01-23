@@ -30,7 +30,7 @@ def get_default_vars():
 
 
 def is_ci_running():
-    return os.getenv("APPVEYOR_REPO_NAME", "") or os.getenv("TRAVIS_REPO_SLUG", "")
+    return os.getenv("APPVEYOR_REPO_NAME", "") or os.getenv("TRAVIS_REPO_SLUG", "") or os.getenv("CIRCLECI", "")
 
 
 def get_ci_vars():
@@ -40,8 +40,14 @@ def get_ci_vars():
     reponame_t = os.getenv("TRAVIS_REPO_SLUG","")
     repobranch_t = os.getenv("TRAVIS_BRANCH","")
 
-    username, _ = reponame_a.split("/") if reponame_a else reponame_t.split("/")
-    channel, version = repobranch_a.split("/") if repobranch_a else repobranch_t.split("/")
+    reponame_c = os.getenv("CIRCLE_PROJECT_USERNAME", "")
+    repobranch_c = os.getenv("CIRCLE_BRANCH", "")
+
+    reponame = reponame_a or reponame_t or reponame_c
+    repobranch = repobranch_a or repobranch_t or repobranch_c
+
+    username, _ = reponame.split("/")
+    channel, version = repobranch.split("/")
     return username, channel, version
 
 
