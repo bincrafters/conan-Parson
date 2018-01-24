@@ -19,12 +19,6 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv activate conan
 fi
 
-SUDO=
-if [[ "$(uname -s)" == 'Linux' ]] && [[ "$CIRCLECI" == "true" ]]; then
-    SUDO=sudo
-fi
-
-$SUDO pip install conan --upgrade
-$SUDO pip install conan_package_tools
-
+pip install conan --upgrade
+pip install conan_package_tools
 conan user
