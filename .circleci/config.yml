@@ -4,10 +4,14 @@ version: 2
     - checkout
     - run:
         name: Update Conan package
-        command: .travis/install.sh
+        command: |
+          chmod +x .circleci/install.sh
+          .circleci/install.sh
     - run:
         name: Build recipe
-        command: .travis/run.sh
+        command: |
+          chmod +x .circleci/run.sh
+          .circleci/run.sh
 
 jobs:
   xcode8:
