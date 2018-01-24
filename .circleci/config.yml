@@ -24,17 +24,9 @@ jobs:
       - CONAN_APPLE_CLANG_VERSIONS: "9.0"
     <<: *conan-steps
 
-  gcc-7:
-    docker:
-      - image: lasote/conangcc7
-    environment:
-      - CONAN_GCC_VERSIONS: "7"
-    <<: *conan-steps
-
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - gcc-7
       - xcode8
       - xcode9
