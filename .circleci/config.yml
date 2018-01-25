@@ -14,6 +14,7 @@ version: 2
         key: pip-cache
         paths:
             - ~/Library/Caches/pip
+            - ~/Library/Caches/Homebrew
     - run:
         name: Build recipe
         command: |
