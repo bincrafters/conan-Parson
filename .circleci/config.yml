@@ -4,14 +4,14 @@ version: 2
     - checkout
     - restore_cache:
         keys:
-          - pip-cache
+          - conan-cache
     - run:
         name: Update Conan package
         command: |
           chmod +x .circleci/install.sh
           .circleci/install.sh
     - save_cache:
-        key: pip-cache
+        key: conan-cache
         paths:
             - ~/Library/Caches/pip
             - ~/Library/Caches/Homebrew
