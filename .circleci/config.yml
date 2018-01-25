@@ -2,11 +2,19 @@ version: 2
 .conan-steps: &conan-steps
   steps:
     - checkout
+    - restore_cache:
+        keys:
+          - conan-cache
     - run:
         name: Update Conan package
         command: |
           chmod +x .circleci/install.sh
           .circleci/install.sh
+    - save_cache:
+        key: conan-cache
+        paths:
+            - ~/Library/Caches/pip
+            - ~/Library/Caches/Homebrew
     - run:
         name: Build recipe
         command: |
