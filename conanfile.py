@@ -16,12 +16,16 @@ class ParsonConan(ConanFile):
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
-    options = {"shared": [True, False]}
-    default_options = "shared=False"
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = "shared=False", "fPIC=True"
 
     def source(self):
         tools.get("https://github.com/kgabis/parson/archive/master.zip")
         os.rename("parson-master", "parson")
+
+    def config_options(self):
+        if self.settings.os == "Windows":
+            del self.options.fPIC
 
     def configure(self):
         del self.settings.compiler.libcxx
@@ -30,10 +34,12 @@ class ParsonConan(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        cmake.install()
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src="parson", keep_path=False)
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.install()
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
