@@ -11,7 +11,7 @@ if (WIN32 AND MSVC AND BUILD_SHARED_LIBS)
 endif(MSVC AND BUILD_SHARED_LIBS)
 
 # Build target #################################################################
-add_library(${CMAKE_PROJECT_NAME} parson/parson.c parson/parson.h)
+add_library(${CMAKE_PROJECT_NAME} parson.c parson.h)
 
 # Enable warnings when GCC or Clang ############################################
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -24,4 +24,4 @@ install(TARGETS ${CMAKE_PROJECT_NAME}
         LIBRARY DESTINATION lib
         RUNTIME DESTINATION bin
         PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ GROUP_WRITE WORLD_READ)
-install(FILES parson/parson.h DESTINATION include)
+install(FILES parson.h DESTINATION include)
