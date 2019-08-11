@@ -2,7 +2,7 @@
 
 | Bintray | Windows | Linux & macOS |
 |:--------:|:---------:|:-----------------:|
-|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/parson%3Abincrafters/images/download.svg)](https://bintray.com/bincrafters/public-conan/parson%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-parson?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-parson)|[![Build Status](https://travis-ci.org/bincrafters/conan-parson.svg)](https://travis-ci.org/bincrafters/conan-parson)|
+|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/parson%3Abincrafters/images/download.svg)](https://bintray.com/bincrafters/public-conan/parson%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-parson?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-parson)|[![Build Status](https://travis-ci.com/bincrafters/conan-parson.svg)](https://travis-ci.com/bincrafters/conan-parson)|
 
 ## Conan.io Information
 

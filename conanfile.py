@@ -18,15 +18,15 @@ class ParsonConan(ConanFile):
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = "shared=False", "fPIC=True"
-    source_subfolder = "source_subfolder"
+    default_options = {'shared': False, 'fPIC': True}
+    _source_subfolder = "source_subfolder"
 
     def source(self):
         commit = "4f3eaa6849ba62404fc5756650168bb2056d0b46"
         tools.get("{0}/archive/{1}.tar.gz".format(self.homepage, commit))
         extracted_dir = self.name + "-" + commit
-        os.rename(extracted_dir, self.source_subfolder)
-        shutil.move("CMakeLists.txt", self.source_subfolder)
+        os.rename(extracted_dir, self._source_subfolder)
+        shutil.move("CMakeLists.txt", self._source_subfolder)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -35,18 +35,18 @@ class ParsonConan(ConanFile):
     def configure(self):
         del self.settings.compiler.libcxx
 
-    def configure_cmake(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
-        cmake.configure(source_folder=self.source_subfolder)
+        cmake.configure(source_folder=self._source_subfolder)
         return cmake
 
     def build(self):
-        cmake = self.configure_cmake()
+        cmake = self._configure_cmake()
         cmake.build()
 
     def package(self):
-        self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder, keep_path=False)
-        cmake = self.configure_cmake()
+        self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder, keep_path=False)
+        cmake = self._configure_cmake()
         cmake.install()
 
     def package_info(self):
