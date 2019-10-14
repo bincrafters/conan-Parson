@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
 import shutil
 from conans import ConanFile, CMake, tools
@@ -34,6 +31,7 @@ class ParsonConan(ConanFile):
 
     def configure(self):
         del self.settings.compiler.libcxx
+        del self.settings.compiler.cppstd
 
     def _configure_cmake(self):
         cmake = CMake(self)
